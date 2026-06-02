@@ -1,26 +1,64 @@
-# Pertemuan 10 - Praktikum Pemrograman Mobile
+# Aplikasi Flutter dengan Local Storage (SharedPreferences)
 
-Halo! 👋 Selamat datang di repositori proyek Praktikum Pemrograman Mobile (Pertemuan 10).
-Proyek ini dikembangkan oleh **Rizky Bagja N** (NIM: 2306075).
+Aplikasi Flutter ini dirancang untuk mendemonstrasikan implementasi penyimpanan lokal (**Local Storage**) menggunakan package `shared_preferences` untuk menangani sesi autentikasi pengguna (Login/Logout) serta operasi **CRUD (Create, Read, Update, Delete) Produk**.
 
-## 📝 Deskripsi Proyek
-Proyek ini merupakan implementasi halaman login sederhana menggunakan Flutter. Pada tugas kali ini, telah dilakukan beberapa pembaruan dari modul sebelumnya, di antaranya:
-1. **Penambahan Kolom Password**: Menambahkan widget `TextFormField` untuk input password guna melengkapi form login. Kolom password ini juga dilengkapi dengan fitur visibilitas (ikon mata) untuk menampilkan atau menyembunyikan teks sandi yang diketik.
-2. **Implementasi Validator**: Mengubah input yang awalnya menggunakan `TextField` biasa menjadi `TextFormField` dan membungkusnya di dalam widget `Form`. Validator ini berfungsi untuk:
-   - Memastikan kolom **username** tidak boleh kosong.
-   - Memastikan kolom **password** tidak boleh kosong dan minimal terdiri dari 6 karakter.
-   
-   Jika form belum diisi dengan benar dan tombol login ditekan, maka pesan peringatan (error) akan otomatis muncul di bawah kolom input yang bersangkutan (menggantikan penggunaan `AlertDialog` agar antarmuka lebih rapi dan standar).
+## 📌 Fitur Utama
 
-## 🛠️ Teknologi yang Digunakan
-- **Flutter SDK** & **Dart**
-- **Shared Preferences** (digunakan untuk menyimpan sesi login pengguna)
+### 1. Autentikasi Pengguna (Login/Logout)
+- Menyimpan status login pengguna (`isLogin` dan `username`) secara lokal.
+- Sesi tetap terjaga meskipun aplikasi ditutup dan dibuka kembali.
+- Form login dilengkapi dengan validasi input (Username tidak boleh kosong, Password minimal 6 karakter).
+- Pilihan untuk melihat/menyembunyikan password (*Show/Hide Password*).
 
-## 🚀 Cara Menjalankan
-1. Pastikan Anda sudah menginstal Flutter pada perangkat Anda.
-2. Lakukan *clone* repositori ini ke komputer Anda.
-3. Buka terminal atau *command prompt* dan arahkan ke direktori proyek ini.
-4. Jalankan perintah `flutter pub get` untuk mengunduh seluruh dependensi yang dibutuhkan.
-5. Jalankan aplikasi menggunakan perintah `flutter run`.
+### 2. CRUD Produk
+- **Create**: Menambahkan produk baru melalui modal bottom sheet yang dinamis dengan validasi data (Nama, Deskripsi, dan Harga).
+- **Read**: Menampilkan daftar produk yang tersimpan dalam format Card yang responsif dan estetis.
+- **Update**: Memperbarui informasi produk yang sudah ada (menggunakan ID unik bertipe timestamp).
+- **Delete**: Menghapus produk dari daftar dengan dialog konfirmasi terlebih dahulu untuk menghindari ketidaksengajaan.
 
-Terima kasih telah mengunjungi repositori ini. Semoga proyek ini dapat memberikan manfaat dan memenuhi kriteria penilaian tugas praktikum dengan baik. 🙏
+### 3. Pengolahan Data Lokal (Local Storage)
+- Semua produk disimpan dalam format JSON string list (`List<String>`) pada `SharedPreferences`.
+- Data produk tetap aman dan tidak terhapus ketika user melakukan logout (hanya sesi user saja yang dibersihkan).
+
+---
+
+## 🛠️ Teknologi & Packages
+
+- **SDK**: Flutter (Dart >=3.11.0)
+- **State Management**: `StatefulWidget` (State lokal)
+- **Local Storage**: `shared_preferences`
+- **Tampilan/UI**: Material 3 dengan gaya modern (Glassmorphism card, rounded sheets, dan custom validation).
+
+---
+
+## 📂 Struktur Proyek
+
+```
+lib/
+├── main.dart             # Entry point aplikasi & pengecekan sesi login
+├── models/
+│   └── product_model.dart # Model representasi produk & parsing JSON
+└── pages/
+    ├── login_page.dart   # Halaman login dengan validasi
+    └── home_page.dart    # Halaman utama & pengelolaan CRUD produk
+```
+
+---
+
+## 🚀 Cara Menjalankan Aplikasi
+
+1. Pastikan Flutter SDK telah terinstal di perangkat Anda.
+2. Clone atau salin direktori proyek ini.
+3. Jalankan perintah untuk mengunduh package/dependencies:
+   ```bash
+   flutter pub get
+   ```
+4. Hubungkan perangkat emulator atau fisik Anda.
+5. Jalankan aplikasi dengan perintah:
+   ```bash
+   flutter run
+   ```
+   Atau untuk target web/Chrome:
+   ```bash
+   flutter run -d chrome
+   ```

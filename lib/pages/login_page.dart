@@ -18,16 +18,34 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> login() async {
     if (_formKey.currentState!.validate()) {
+      final username = usernameController.text.trim();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Login Berhasil!'),
+          backgroundColor: Colors.green,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+
       final prefs = await SharedPreferences.getInstance();
 
       await prefs.setBool('isLogin', true);
-      await prefs.setString('username', usernameController.text.trim());
+      await prefs.setString('username', username);
 
       if (!mounted) return;
 
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const HomePage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Login Gagal: Periksa kembali form input Anda!'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
       );
     }
   }
