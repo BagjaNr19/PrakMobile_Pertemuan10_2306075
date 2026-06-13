@@ -62,3 +62,38 @@ lib/
    ```bash
    flutter run -d chrome
    ```
+
+   ---
+
+   ## 📝 Perubahan Terbaru (ringkasan)
+
+   - Commit: "Update product_model and home_page"
+      - Files changed: `lib/models/product_model.dart`, `lib/pages/home_page.dart`
+   - Commit: "refactoring"
+      - Files added: `lib/pages/product_detail_page.dart`, `lib/pages/product_page.dart`, `lib/widgets/product_card.dart`
+
+   Jika kamu hanya ingin meng-upload perubahan yang sudah dimodifikasi (tanpa menambahkan file baru), gunakan:
+
+   ```bash
+   git add lib/models/product_model.dart lib/pages/home_page.dart
+   git commit -m "Update product_model and home_page"
+   git push origin main
+   ```
+
+   Untuk menambahkan file baru lalu push (yang sudah saya lakukan dengan commit "refactoring") gunakan:
+
+   ```bash
+   git add lib/pages/product_detail_page.dart lib/pages/product_page.dart lib/widgets/
+   git commit -m "refactoring"
+   git push origin main
+   ```
+
+   ## ℹ️ Cara Berkontribusi Singkat
+
+   - Buat branch baru untuk fitur/bugfix: `git checkout -b feat/nama-fitur`
+   - Tambah dan commit perubahan secara terpisah untuk fitur yang berbeda
+   - Buat Pull Request ke `main` ketika siap untuk review
+
+   ---
+
+   Jika mau, saya bisa juga membuat file `CHANGELOG.md` otomatis berisi daftar commit; mau saya tambahkan?
